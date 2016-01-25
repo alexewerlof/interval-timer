@@ -1,0 +1,22 @@
+{
+  "name": "interval-timer",
+  "version": "0.0.1",
+  "description": "A web application for interval timers",
+  "main": "index.js",
+  "scripts": {
+    "compile:ts": "tsc",
+    "pretest": "npm run compile:ts",
+    "test": "mocha",
+    "postinstall": "tsd install"
+  },
+  "keywords": [
+    "chrome-extension",
+    "browser-app"
+  ],
+  "author": "Userpixel",
+  "license": "ISC",
+  "devDependencies": {
+    "tsd": "^0.6.5",
+    "typescript": "^1.7.5"
+  }
+}

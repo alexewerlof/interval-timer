@@ -1,0 +1,24 @@
+{
+    "version": "0.1.0",
+    "command": "npm",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "args": [
+        "run"
+    ],
+    "tasks": [
+        {
+            "taskName": "compile:ts",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "problemMatcher": [
+                "$tsc"
+            ]
+        },
+        {
+            "taskName": "test",
+            "isTestCommand": true,
+            "showOutput": "always"
+        }
+    ]
+}
