@@ -26,6 +26,15 @@ export class Track implements TrackDescription {
     public moveToEnd() {
         this.passed = this.length;
     }
+
+    public addTime(ms: number): number {
+        this.passed += ms;
+        var extra = this.passed - this.length;
+        if (this.passed > this.length) {
+            this.passed = this.length;
+        }
+        return extra;
+    }
 }
 
 export class PlayList {
@@ -66,6 +75,23 @@ export class PlayList {
 
     public get remaining(): number {
         return this.tracks.reduce((sum, track) => sum + track.remaining, 0);
+    }
+
+    public isEmpty() {
+        return this.tracks.length === 0;
+    }
+
+    public addTime(ms: number) {
+        if (this.isEmpty()) {
+            throw 'Cannot play an empty playlist';
+        }
+        do {
+            var extra = this.currentTrack.addTime(ms);
+            if (extra > 0) {
+                ms = extra;
+                this.next();
+            }
+        } while (extra > 0);
     }
 }
 
