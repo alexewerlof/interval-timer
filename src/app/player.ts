@@ -12,15 +12,19 @@ export class Track implements TrackDescription {
     public constructor(trackDescription: TrackDescription) {
         this.title = trackDescription.title;
         this.length = trackDescription.length;
-        this.init();
-    }
-
-    public init() {
-        this.passed = 0;
+        this.moveToStart();
     }
 
     public get remaining(): number {
         return this.length - this.passed;
+    }
+
+    public moveToStart() {
+        this.passed = 0;
+    }
+
+    public moveToEnd() {
+        this.passed = this.length;
     }
 }
 
@@ -42,6 +46,7 @@ export class PlayList {
     }
 
     public next(): this {
+        this.currentTrack.moveToEnd();
         if (this.currentTrackIndex < this.tracks.length - 1) {
             this.currentTrackIndex++;
         }
