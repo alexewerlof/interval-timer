@@ -1,7 +1,6 @@
 interface TrackDescription {
     title: string;
     length: number;
-    passed: number;
 }
 
 export class Track implements TrackDescription {
@@ -13,7 +12,7 @@ export class Track implements TrackDescription {
     public constructor(trackDescription: TrackDescription) {
         this.title = trackDescription.title;
         this.length = trackDescription.length;
-        this.passed = trackDescription.passed;
+        this.init();
     }
 
     public init() {
@@ -29,6 +28,14 @@ export class PlayList {
 
     private currentTrackIndex: number = 0;
     public tracks: Track[] = [];
+
+    public constructor(oneLoopTrack: Track[], loopCounter: number) {
+        for (let i = 0; i < loopCounter; i++) {
+            for (let j = 0; j < oneLoopTrack.length; j++) {
+                this.tracks.push(new Track(oneLoopTrack[j]));
+            }
+        }
+    }
 
     public get currentTrack(): Track {
         return this.tracks[this.currentTrackIndex];
@@ -55,16 +62,6 @@ export class PlayList {
     public get remaining(): number {
         return this.tracks.reduce((sum, track) => sum + track.remaining, 0);
     }
-}
-
-function PlayListGenerator(oneLoopTrack: Track[], loopCounter: number): PlayList {
-    var ret = new PlayList();
-    for (let i = 0; i < loopCounter; i++) {
-        for (let j = 0; j < oneLoopTrack.length; j++) {
-            ret.tracks.push(new Track(oneLoopTrack[j]));
-        }
-    }
-    return ret;
 }
 
 export enum EngineState {
