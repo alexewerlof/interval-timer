@@ -103,4 +103,11 @@ export enum EngineState {
 
 export class Engine {
     private playList: PlayList;
+    private remainingTime: number;
+    
+    public tickListener:(ms: number) => void;
+    
+    public start() {
+        setTimeout()
+    }
 }
